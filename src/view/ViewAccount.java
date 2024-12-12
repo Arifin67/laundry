@@ -127,7 +127,7 @@ public class ViewAccount extends javax.swing.JPanel {
         deleteBtn.setBackground(new java.awt.Color(255, 51, 102));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Delete.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Delete.png"))); // NOI18N
         jLabel1.setText("Delete");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -154,7 +154,7 @@ public class ViewAccount extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(255, 255, 0));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Synchronize.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Synchronize.png"))); // NOI18N
         jLabel3.setText("Update");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -187,7 +187,7 @@ public class ViewAccount extends javax.swing.JPanel {
         });
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Add.png"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Add.png"))); // NOI18N
         jLabel6.setText("Add");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

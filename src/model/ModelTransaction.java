@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author abdularifin
@@ -66,11 +68,11 @@ public class ModelTransaction {
         this.customerName = customerName;
     }
 
-    public Integer getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
@@ -90,6 +92,33 @@ public class ModelTransaction {
     private ModelUser userName;
     private ModelCustomer customerId;
     private ModelCustomer customerName;
-    private Integer weight;
+    private int weight;
     private int price;
+
+    public Date getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
+
+    public Date getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(Date updated_at) {
+        this.updated_at = updated_at;
+    }
+    private Date created_at;
+    private Date updated_at;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+    private boolean status;
 }

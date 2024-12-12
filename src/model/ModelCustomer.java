@@ -10,11 +10,11 @@ package model;
  */
 public class ModelCustomer {
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,7 +41,7 @@ public class ModelCustomer {
     public void setAddress(String address) {
         this.address = address;
     }
-    private String id;
+    private int id;
     private String customerName;
     private String phoneNumber;
     private String address;

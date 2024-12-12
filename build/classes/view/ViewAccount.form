@@ -255,7 +255,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/laundrykasir/img/Delete.png"/>
+                          <Image iconType="3" name="/img/Delete.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Delete"/>
                       </Properties>
@@ -296,7 +296,7 @@
                     <Component class="javax.swing.JLabel" name="jLabel3">
                       <Properties>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/laundrykasir/img/Synchronize.png"/>
+                          <Image iconType="3" name="/img/Synchronize.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Update"/>
                       </Properties>
@@ -343,7 +343,7 @@
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/laundrykasir/img/Add.png"/>
+                          <Image iconType="3" name="/img/Add.png"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="Add"/>
                       </Properties>

@@ -82,9 +82,9 @@ public class menuUtama extends javax.swing.JFrame {
         header.setBackground(new java.awt.Color(204, 204, 255));
         header.setPreferredSize(new java.awt.Dimension(734, 75));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Washing Machine.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Washing Machine.png"))); // NOI18N
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Cancel_1.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Cancel_1.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -106,10 +106,12 @@ public class menuUtama extends javax.swing.JFrame {
             headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, headerLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addGap(54, 54, 54))
+            .addGroup(headerLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(header, java.awt.BorderLayout.PAGE_START);
@@ -133,7 +135,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Home.png"))); // NOI18N
+        icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Home.png"))); // NOI18N
 
         menuHome.setBackground(new java.awt.Color(255, 255, 255));
         menuHome.setText("Home");
@@ -197,7 +199,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Service.png"))); // NOI18N
+        icon1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Service.png"))); // NOI18N
 
         menuService.setBackground(new java.awt.Color(255, 255, 255));
         menuService.setText("Service");
@@ -256,7 +258,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Exchange Dollar.png"))); // NOI18N
+        icon2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Exchange Dollar.png"))); // NOI18N
 
         menuTransaction.setBackground(new java.awt.Color(255, 255, 255));
         menuTransaction.setText("Transaction");
@@ -315,7 +317,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        icon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Add Administrator.png"))); // NOI18N
+        icon3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Add Administrator.png"))); // NOI18N
 
         menuAccount.setBackground(new java.awt.Color(255, 255, 255));
         menuAccount.setText("Account");
@@ -374,7 +376,7 @@ public class menuUtama extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        icon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Logout.png"))); // NOI18N
+        icon4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Logout.png"))); // NOI18N
 
         menuLogout.setBackground(new java.awt.Color(255, 255, 255));
         menuLogout.setText("Logout");
@@ -483,7 +485,7 @@ public class menuUtama extends javax.swing.JFrame {
         mainPanel.add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Woman doing laundry in washing machine.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Woman doing laundry in washing machine.png"))); // NOI18N
         mainPanel.add(jLabel4, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout contentLayout = new javax.swing.GroupLayout(content);
@@ -523,7 +525,7 @@ public class menuUtama extends javax.swing.JFrame {
         pn2.repaint();
         
         mainPanel.removeAll();
-        mainPanel.add(new ViewHome());
+//        mainPanel.add(new ViewHome());
         mainPanel.repaint();
         mainPanel.revalidate();
     }//GEN-LAST:event_menuHomeMouseClicked

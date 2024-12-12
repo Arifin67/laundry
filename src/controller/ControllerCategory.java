@@ -285,6 +285,77 @@ private boolean isValidCategoryName(String categoryName) {
     }
     return categories; // Kembalikan daftar kategori
         }
+    
+    @Override
+public List<ModelService> showService() {
+    List<ModelService> services = new ArrayList<>();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        // Query SQL untuk mendapatkan daftar layanan
+        String query = "SELECT * FROM service";
+        pstmt = conn.prepareStatement(query);
+        rs = pstmt.executeQuery();
+
+        // Iterasi hasil query dan tambahkan ke daftar
+        while (rs.next()) {
+            ModelService service = new ModelService();
+            service.setId(rs.getInt("id")); // Ambil ID layanan
+            service.setName(rs.getString("name")); // Ambil nama layanan
+            services.add(service); // Tambahkan ke daftar
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (rs != null) rs.close();
+            if (pstmt != null) pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    return services;
+}
+
+   @Override
+public List<ModelCategory> findCategoryByServiceName(String serviceName) {
+    List<ModelCategory> categories = new ArrayList<>();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+
+    try {
+        // Query untuk mencari kategori berdasarkan nama layanan
+        String query = "SELECT * FROM category WHERE service_id = (SELECT id FROM service WHERE name = ?)";
+        
+        // Siapkan statement
+        pstmt = conn.prepareStatement(query);
+        
+        // Set parameter pencarian
+        pstmt.setString(1, serviceName);
+        
+        // Eksekusi query
+        rs = pstmt.executeQuery();
+        
+        // Iterasi hasil pencarian
+        while (rs.next()) {
+            ModelCategory category = new ModelCategory();
+            category.setId(rs.getInt("id"));
+            category.setName(rs.getString("name"));
+            category.setPrice(rs.getInt("price"));
+            
+            // Tambahkan kategori ke daftar
+            categories.add(category);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return categories;
+}
+
+
     }
     
 

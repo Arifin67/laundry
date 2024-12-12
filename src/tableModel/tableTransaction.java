@@ -18,6 +18,8 @@ import model.ModelTransaction;
 public class tableTransaction extends AbstractTableModel {
 
     private List<ModelTransaction> list= new ArrayList<>();
+    private List<ModelTransaction> filteredTransactions = new ArrayList<>();
+
     
     public ModelTransaction getTransaction(int index){
         return list.get(index);
@@ -37,12 +39,19 @@ public void insertData(List<ModelTransaction> transactions) {
 }
 
 
-    public void updatedData(int row, ModelTransaction transaction){
-     
-        list.set(row,transaction);
+    public void updatedData(int row, ModelTransaction transaction) {
+    // Periksa apakah indeks row valid
+    if (row >= 0 && row < list.size()) {
+        // Perbarui data jika indeks valid
+        list.set(row, transaction);
         fireTableRowsUpdated(row, row);
-        JOptionPane.showMessageDialog(null,transaction.getCategoryId() + " succesfully updated!");
+        JOptionPane.showMessageDialog(null, transaction.getCategoryId() + " successfully updated!");
+    } else {
+        // Jika row tidak valid, tampilkan pesan kesalahan
+        JOptionPane.showMessageDialog(null, "Invalid row index: " + row);
     }
+}
+
     public void deletedData(int row, ModelCategory category){
         list.remove(row);
         fireTableRowsDeleted(row,row);
@@ -54,11 +63,82 @@ public void insertData(List<ModelTransaction> transactions) {
         this.list.addAll(list);
         fireTableDataChanged();
     }
-    private final String[] columnNames = {"no", "service name", "category", "price"};
+    private final String[] columnNames = {"no","name", "service name", "category","weight", "price", "status"};
     @Override
     public int getRowCount() {
            return list.size();
     }
+    
+public void searchAndSetData(String customerName) {
+    List<ModelTransaction> tempTransactions = new ArrayList<>();
+
+    if (filteredTransactions.isEmpty()) {
+        // Jika belum ada transaksi yang difilter, gunakan seluruh data
+        tempTransactions = list;
+    } else {
+        // Gunakan transaksi yang sudah difilter sebagai basis
+        tempTransactions = filteredTransactions;
+    }
+
+    // Filter berdasarkan nama pelanggan
+    List<ModelTransaction> filtered = new ArrayList<>();
+    for (ModelTransaction transaction : tempTransactions) {
+        if (transaction.getCustomerName() != null &&
+            transaction.getCustomerName().getCustomerName().toLowerCase().contains(customerName.toLowerCase())) {
+            filtered.add(transaction);
+        }
+    }
+
+    // Simpan hasil filter untuk filter berikutnya
+    filteredTransactions = filtered;
+    
+    setData(filtered);
+}
+
+
+public void searchAndSetData(String customerName, boolean status) {
+    List<ModelTransaction> filteredTransactions = new ArrayList<>();
+
+    for (ModelTransaction transaction : list) {
+        if (transaction.getCustomerName() != null &&
+            transaction.getCustomerName().getCustomerName().toLowerCase().contains(customerName.toLowerCase()) &&
+            transaction.isStatus() == status) {
+            filteredTransactions.add(transaction);
+        }
+    }
+
+    // Set data tabel hanya dengan transaksi yang sesuai
+    setData(filteredTransactions);
+}
+
+public void searchAndSetData(boolean status) {
+    List<ModelTransaction> tempTransactions = new ArrayList<>();
+
+    if (filteredTransactions.isEmpty()) {
+        // Jika belum ada transaksi yang difilter, gunakan seluruh data
+        tempTransactions = list;
+    } else {
+        // Gunakan transaksi yang sudah difilter sebagai basis
+        tempTransactions = filteredTransactions;
+    }
+
+    // Filter berdasarkan status
+    List<ModelTransaction> filtered = new ArrayList<>();
+    for (ModelTransaction transaction : tempTransactions) {
+        if (transaction.isStatus() == status) {
+            filtered.add(transaction);
+        }
+    }
+
+    // Simpan hasil filter untuk filter berikutnya
+    filteredTransactions = filtered;
+    
+    setData(filtered);
+}
+
+
+
+
 
     @Override
     public int getColumnCount() {
@@ -81,6 +161,8 @@ public void insertData(List<ModelTransaction> transactions) {
                 return transaction.getWeight();
             case 5 :
                 return transaction.getPrice();
+            case 6 :
+                return transaction.isStatus();
             default :
                 return null;
         }

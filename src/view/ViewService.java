@@ -92,7 +92,7 @@ public class ViewService extends javax.swing.JPanel {
 
         addBtn.setBackground(new java.awt.Color(102, 255, 204));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Add.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Add.png"))); // NOI18N
         jLabel1.setText("Add");
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,7 +151,7 @@ public class ViewService extends javax.swing.JPanel {
 
         updateBtn.setBackground(new java.awt.Color(255, 255, 0));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Synchronize.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Synchronize.png"))); // NOI18N
         jLabel3.setText("Update");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -179,7 +179,7 @@ public class ViewService extends javax.swing.JPanel {
         deleteBtn.setBackground(new java.awt.Color(255, 51, 102));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/laundrykasir/img/Delete.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Delete.png"))); // NOI18N
         jLabel2.setText("Delete");
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -270,7 +270,7 @@ public class ViewService extends javax.swing.JPanel {
     
     // Memeriksa apakah baris yang dipilih valid
     if (row < 0) {
-        JOptionPane.showMessageDialog(this, "Please select a user to edit.");
+        JOptionPane.showMessageDialog(this, "Please select a service to edit.");
         return; // Keluar dari metode jika tidak ada baris yang dipilih
     }
     

@@ -19,4 +19,6 @@ public interface CategoryInterface {
     void deleteCategory( ModelCategory category);
     
     List<ModelCategory> showCategory();
+    List<ModelService> showService();
+    List<ModelCategory> findCategoryByServiceName(String serviceName);
 }

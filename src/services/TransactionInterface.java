@@ -16,9 +16,11 @@ import model.ModelUser;
  * @author abdularifin
  */
 public interface TransactionInterface {
-    void addTransaction(ModelService service, List<ModelCategory> categories, ModelUser user, ModelCustomer customer, ModelTransaction transaction);
-    void editTransaction( ModelService service, List<ModelCategory> categories, ModelUser user, ModelCustomer customer, ModelTransaction transaction);
-    void deleteTransaction( ModelService service, List<ModelCategory> categories, ModelUser user, ModelCustomer customer, ModelTransaction transaction);
+    int addTransaction(ModelService service, ModelCategory category, ModelUser user, ModelCustomer customer, ModelTransaction transaction);
+    void editTransaction(ModelTransaction transaction);
+    void deleteTransaction( ModelService service, ModelCategory category, ModelUser user, ModelCustomer customer, ModelTransaction transaction);
     
-    List<ModelCategory> showTransaction();
+    List<ModelTransaction> showTransaction();
+    List<ModelTransaction> showTransactionByNow();
+    double showTransactionForProfit();
 }

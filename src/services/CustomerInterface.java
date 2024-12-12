@@ -17,4 +17,5 @@ public interface CustomerInterface {
     void deleteUser (ModelCustomer cs);
     
     List<ModelCustomer> showUser();
+    List<ModelCustomer> findUserByName(String name);
 }

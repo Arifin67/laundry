@@ -25,6 +25,11 @@ public class ModelService {
     public void setName(String name) {
         this.name = name;
     }
+    
+    @Override
+    public String toString() {
+        return this.name; // Mengembalikan nama layanan sebagai representasi string
+    }
 
 private int id;
 private String name;

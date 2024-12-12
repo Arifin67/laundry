@@ -4,12 +4,44 @@
  */
 package view;
 
+import controller.ControllerCategory;
+import controller.ControllerCs;
+import controller.ControllerTransaction;
+import controller.ReportController;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import model.ModelCategory;
+import model.ModelCustomer;
+import model.ModelService;
+import model.ModelTransaction;
+import model.ModelUser;
+import services.CategoryInterface;
+import services.CustomerInterface;
+import services.ReportInterface;
+import services.TransactionInterface;
+import tableModel.tableCategory;
+import tableModel.tableCategoryService;
+import tableModel.tableCustomer;
+import tableModel.tableTransaction;
+
 /**
  *
  * @author abdularifin
  */
 public class FormAddTransaction extends javax.swing.JDialog {
+    private final tableCustomer tblCs = new tableCustomer();
+    private final tableCategory tblCat = new tableCategory();
+    private final tableTransaction tblTransaction = new tableTransaction();
+    
+    
+    private final CustomerInterface servis = new ControllerCs();
+    private final TransactionInterface servisTransaction = new ControllerTransaction();
+    private final CategoryInterface servisCategory = new ControllerCategory();
+    private final ReportInterface servisReport = new ReportController();
 
+    private  int transactionId;
     /**
      * Creates new form FormAddTransaction
      */
@@ -17,6 +49,13 @@ public class FormAddTransaction extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         formCs.setVisible(false);
+        
+        
+        loadServicesIntoJComboBox();
+        loadCategoriesIntoComboBox();
+        
+        
+        
         
     }
 
@@ -41,22 +80,27 @@ public class FormAddTransaction extends javax.swing.JDialog {
         lblForName = new javax.swing.JLabel();
         lblForPhoneNumber = new javax.swing.JLabel();
         lblForAddress = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         lblForTotal = new javax.swing.JLabel();
-        lblTotalTransaction = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
         lblAlamat = new javax.swing.JLabel();
         lblNoHp = new javax.swing.JLabel();
         lblName = new javax.swing.JLabel();
+        lblForAddress1 = new javax.swing.JLabel();
+        lblServiceName = new javax.swing.JLabel();
+        lblForAddress2 = new javax.swing.JLabel();
+        lblCategoryName = new javax.swing.JLabel();
+        lblWeightName = new javax.swing.JLabel();
+        lblForAddress3 = new javax.swing.JLabel();
+        printBtn = new javax.swing.JButton();
         btnClearService = new javax.swing.JButton();
         btnAddCategory = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        fieldSearchCs = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         btnFormCs = new javax.swing.JButton();
         formCs = new javax.swing.JPanel();
         lblNamaCs = new javax.swing.JLabel();
-        fieldNamaCs = new javax.swing.JTextField();
+        fieldNameCs = new javax.swing.JTextField();
         lblPhoneNumber = new javax.swing.JLabel();
         fieldPhoneNumber = new javax.swing.JTextField();
         lblAddress = new javax.swing.JLabel();
@@ -88,8 +132,6 @@ public class FormAddTransaction extends javax.swing.JDialog {
 
         lblWeight.setText("Masukkan Berat");
 
-        fieldWeight.setText("jTextField1");
-
         pnlDetailTransaction.setBackground(new java.awt.Color(255, 255, 255));
         pnlDetailTransaction.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
@@ -97,41 +139,48 @@ public class FormAddTransaction extends javax.swing.JDialog {
         lblDetail.setText("Detail Pesanan");
 
         lblForName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblForName.setText("Nama:");
+        lblForName.setText("Nama :");
 
         lblForPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblForPhoneNumber.setText("No Hp:");
+        lblForPhoneNumber.setText("No Hp :");
 
         lblForAddress.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblForAddress.setText("Alamat");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        lblForAddress.setText("Alamat :");
 
         lblForTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblForTotal.setText("Total");
+        lblForTotal.setText("Total :");
 
-        lblTotalTransaction.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblTotalTransaction.setText("Rp.000.000,00");
+        lblTotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
         lblAlamat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblAlamat.setText("Indonesia");
 
         lblNoHp.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblNoHp.setText("021234567");
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblName.setText("nama customer");
+
+        lblForAddress1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblForAddress1.setText("Service :");
+
+        lblServiceName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        lblForAddress2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblForAddress2.setText("Category :");
+
+        lblCategoryName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        lblWeightName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        lblForAddress3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblForAddress3.setText("Weight :");
+
+        printBtn.setBackground(new java.awt.Color(0, 51, 255));
+        printBtn.setForeground(new java.awt.Color(255, 255, 255));
+        printBtn.setText("Print");
+        printBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlDetailTransactionLayout = new javax.swing.GroupLayout(pnlDetailTransaction);
         pnlDetailTransaction.setLayout(pnlDetailTransactionLayout);
@@ -140,30 +189,41 @@ public class FormAddTransaction extends javax.swing.JDialog {
             .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
+                            .addComponent(lblForName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
+                            .addComponent(lblForAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
+                            .addComponent(lblForPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblNoHp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
-                        .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
-                                .addComponent(lblForName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
-                                .addComponent(lblForAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
-                                .addComponent(lblForPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblNoHp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(lblDetail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblForAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
-                        .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(lblForAddress2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
+                        .addComponent(lblForAddress3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblWeightName, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
+                        .addComponent(lblForTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnlDetailTransactionLayout.createSequentialGroup()
-                                .addComponent(lblForTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblTotalTransaction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(19, 19, 19)
+                                .addComponent(printBtn)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlDetailTransactionLayout.setVerticalGroup(
             pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,13 +242,25 @@ public class FormAddTransaction extends javax.swing.JDialog {
                 .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAlamat, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
+                .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblForAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblServiceName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblForAddress2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCategoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblForAddress3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblWeightName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(pnlDetailTransactionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblForTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotalTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52)
+                .addComponent(printBtn)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
         btnClearService.setBackground(new java.awt.Color(255, 102, 102));
@@ -205,14 +277,12 @@ public class FormAddTransaction extends javax.swing.JDialog {
 
         jLabel1.setText("SEARCH CUSTOMER");
 
-        jTextField1.setText("jTextField1");
-
-        jButton1.setBackground(new java.awt.Color(0, 51, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Search");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setBackground(new java.awt.Color(0, 51, 255));
+        btnSearch.setForeground(new java.awt.Color(255, 255, 255));
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
 
@@ -231,14 +301,15 @@ public class FormAddTransaction extends javax.swing.JDialog {
 
         lblPhoneNumber.setText("Masukkan no hp Customer");
 
-        fieldPhoneNumber.setText("jTextField1");
-
         lblAddress.setText("Masukkan alamat Customer");
-
-        fieldAddress.setText("jTextField1");
 
         btnClearCs.setBackground(new java.awt.Color(255, 102, 102));
         btnClearCs.setText("Clear");
+        btnClearCs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearCsActionPerformed(evt);
+            }
+        });
 
         btnApplyCs.setBackground(new java.awt.Color(51, 51, 255));
         btnApplyCs.setForeground(new java.awt.Color(255, 255, 255));
@@ -258,7 +329,7 @@ public class FormAddTransaction extends javax.swing.JDialog {
                 .addGroup(formCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(formCsLayout.createSequentialGroup()
                         .addComponent(btnClearCs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                         .addComponent(btnApplyCs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(formCsLayout.createSequentialGroup()
                         .addGroup(formCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +342,7 @@ public class FormAddTransaction extends javax.swing.JDialog {
                     .addGap(112, 112, 112)
                     .addGroup(formCsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblNamaCs)
-                        .addComponent(fieldNamaCs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldNameCs, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(fieldPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblPhoneNumber))
                     .addContainerGap(129, Short.MAX_VALUE)))
@@ -293,7 +364,7 @@ public class FormAddTransaction extends javax.swing.JDialog {
                     .addContainerGap()
                     .addComponent(lblNamaCs, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(fieldNamaCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldNameCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(lblPhoneNumber)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -306,71 +377,71 @@ public class FormAddTransaction extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(69, 69, 69)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblWeight)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnClearService, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                    .addComponent(lblService)
-                                    .addComponent(selectService, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(39, 39, 39)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblCategory)
-                                    .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFormCs)))
-                        .addGap(76, 76, 76))
+                                .addComponent(fieldSearchCs, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSearch)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnFormCs))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(formCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(fieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblWeight)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(btnClearService, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblService)
+                                        .addComponent(selectService, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(39, 39, 39)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblCategory)
+                                        .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(formCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(pnlDetailTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(51, Short.MAX_VALUE)
-                        .addComponent(pnlDetailTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addComponent(btnFormCs))
-                        .addGap(48, 48, 48)
-                        .addComponent(formCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblService)
-                            .addComponent(lblCategory))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(selectService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblWeight)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnClearService, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(51, Short.MAX_VALUE)
+                .addComponent(pnlDetailTransaction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldSearchCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch)
+                    .addComponent(btnFormCs))
+                .addGap(46, 46, 46)
+                .addComponent(formCs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblWeight)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldWeight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblService)
+                    .addComponent(lblCategory))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(selectCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClearService, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -388,24 +459,111 @@ public class FormAddTransaction extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void selectServiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectServiceActionPerformed
-        // TODO add your handling code here:
+      // Panggil loadCategoriesIntoComboBox jika ada layanan yang dipilih
+    if (selectService.getSelectedItem() != null) {
+        loadCategoriesIntoComboBox();
+        }
     }//GEN-LAST:event_selectServiceActionPerformed
 
     private void selectCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectCategoryActionPerformed
-        // TODO add your handling code here:
+    
     }//GEN-LAST:event_selectCategoryActionPerformed
 
     private void btnApplyCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyCsActionPerformed
-        // TODO add your handling code here:
+        saveDataCs();
     }//GEN-LAST:event_btnApplyCsActionPerformed
 
     private void btnAddCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCategoryActionPerformed
-        // TODO add your handling code here:
+    // Periksa apakah nama pelanggan sudah diisi
+    if (lblName.getText().isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Please insert customer first!", "Input Error", JOptionPane.WARNING_MESSAGE);
+    } else {
+        // Ambil data dari form
+        String serviceName = (String) selectService.getSelectedItem();
+        String categoryName = (String) selectCategory.getSelectedItem();
+        String weightText = fieldWeight.getText();
+
+        // Validasi berat (weight) harus berupa angka
+        try {
+            int weight = Integer.parseInt(weightText); // Konversi berat menjadi integer
+            List<ModelTransaction> transactions = new ArrayList<>();
+            // Set nilai ke label
+            lblServiceName.setText(serviceName);
+            lblCategoryName.setText(categoryName);
+            lblWeightName.setText(String.valueOf(weight));
+
+            // Ambil data pelanggan
+            String csName = lblName.getText();
+            String phone = lblNoHp.getText();
+            String address = lblAlamat.getText();
+            int totalPrice = Integer.parseInt(lblTotal.getText().replace("Rp ", "").replace(",", "").trim());
+            System.out.println(totalPrice);
+
+            // Buat objek ModelTransaction
+            ModelTransaction modelTransaction = new ModelTransaction();
+            ModelCategory cat = new ModelCategory();
+            ModelService serv = new ModelService();
+            ModelCustomer cs = new ModelCustomer();
+            ModelUser user = new ModelUser();
+            // Set data ke ModelCustomer
+            cs.setCustomerName(csName);
+            cs.setPhoneNumber(phone);
+            cs.setAddress(address);
+
+            //set data ke ModelCategory;
+            
+            cat.setName(categoryName);
+            //set data ke ModelService
+            serv.setName(serviceName);
+            
+            // Set data ke ModelTransaction
+            modelTransaction.setPrice(totalPrice);
+            modelTransaction.setWeight(weight);
+            modelTransaction.setCustomerId(cs);
+            modelTransaction.setCategoryId(cat);
+            
+            //set data ke ModelUser
+            transactions.add(modelTransaction);
+            // TODO: Lakukan proses penyimpanan atau operasi lainnya dengan model
+            transactionId = servisTransaction.addTransaction(serv, cat, user, cs, modelTransaction);
+            tblTransaction.insertData(transactions);
+            System.out.println(transactions.getLast().getId());
+            JOptionPane.showMessageDialog(this,"id " + transactionId + "Transaction added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (NumberFormatException e) {
+            // Tampilkan pesan jika berat bukan angka
+            JOptionPane.showMessageDialog(this, "Please enter a valid weight! from btn", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_btnAddCategoryActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+     String name = fieldSearchCs.getText(); // Ambil teks dari field pencarian
+     if (name == ""){
+         JOptionPane.showMessageDialog(this, "Bad Resquest");
+         return;
+     }
+    // Cari data berdasarkan nama
+    List<ModelCustomer> customers = servis.findUserByName(name);
+
+    if (customers.isEmpty()) {
+        // Jika tidak ditemukan, tampilkan pesan
+        JOptionPane.showMessageDialog(this, "No customer found!");
+        fieldNameCs.setText("");
+        fieldPhoneNumber.setText("");
+        fieldAddress.setText("");
+    }
+    else {
+        // Ambil hasil pertama
+        ModelCustomer customer = customers.get(0);
+        
+        // Set data ke form
+        lblName.setText(customer.getCustomerName());
+        lblNoHp.setText(customer.getPhoneNumber());
+        lblAlamat.setText(customer.getAddress());
+    }
+
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnFormCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormCsActionPerformed
 
@@ -413,11 +571,20 @@ public class FormAddTransaction extends javax.swing.JDialog {
             btnFormCs.setText("Hide");
             formCs.setVisible(true);
         }else{
-            btnFormCs.setText("Hide");
-            formCs.setVisible(true);
+            btnFormCs.setText("New Customer");
+            formCs.setVisible(false);
         }
         
     }//GEN-LAST:event_btnFormCsActionPerformed
+
+    private void btnClearCsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCsActionPerformed
+        resetForm();
+    }//GEN-LAST:event_btnClearCsActionPerformed
+
+    private void printBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printBtnActionPerformed
+        dispose();
+        servisReport.PrintStruk(transactionId);
+    }//GEN-LAST:event_printBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -467,22 +634,24 @@ public class FormAddTransaction extends javax.swing.JDialog {
     private javax.swing.JButton btnClearCs;
     private javax.swing.JButton btnClearService;
     private javax.swing.JButton btnFormCs;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JTextField fieldAddress;
-    private javax.swing.JTextField fieldNamaCs;
+    private javax.swing.JTextField fieldNameCs;
     private javax.swing.JTextField fieldPhoneNumber;
+    private javax.swing.JTextField fieldSearchCs;
     private javax.swing.JTextField fieldWeight;
     private javax.swing.JPanel formCs;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblAddress;
     private javax.swing.JLabel lblAlamat;
     private javax.swing.JLabel lblCategory;
+    private javax.swing.JLabel lblCategoryName;
     private javax.swing.JLabel lblDetail;
     private javax.swing.JLabel lblForAddress;
+    private javax.swing.JLabel lblForAddress1;
+    private javax.swing.JLabel lblForAddress2;
+    private javax.swing.JLabel lblForAddress3;
     private javax.swing.JLabel lblForName;
     private javax.swing.JLabel lblForPhoneNumber;
     private javax.swing.JLabel lblForTotal;
@@ -491,10 +660,125 @@ public class FormAddTransaction extends javax.swing.JDialog {
     private javax.swing.JLabel lblNoHp;
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblService;
-    private javax.swing.JLabel lblTotalTransaction;
+    private javax.swing.JLabel lblServiceName;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblWeight;
+    private javax.swing.JLabel lblWeightName;
     private javax.swing.JPanel pnlDetailTransaction;
+    private javax.swing.JButton printBtn;
     private javax.swing.JComboBox<String> selectCategory;
     private javax.swing.JComboBox<String> selectService;
     // End of variables declaration//GEN-END:variables
+
+    private void resetForm() {
+        fieldNameCs.setText("");
+        fieldPhoneNumber.setText("");
+        fieldAddress.setText("");
+    }
+
+    private void saveDataCs() {
+        System.out.println(validasiInputCs());
+        if(validasiInputCs() == true){
+            String customerName = fieldNameCs.getText();
+            String phoneNumber = fieldPhoneNumber.getText();
+            String address = fieldAddress.getText();
+            
+            ModelCustomer cs = new ModelCustomer();
+            cs.setCustomerName(customerName);
+            cs.setPhoneNumber(phoneNumber);
+            cs.setAddress(address);
+            
+            tblCs.insertData(cs);
+            servis.addUser(cs);
+            JOptionPane.showMessageDialog(this, cs.getCustomerName() + " succesfully added!");
+            
+            lblName.setText(cs.getCustomerName());
+            lblNoHp.setText(cs.getPhoneNumber());
+            lblAlamat.setText(cs.getAddress());
+            resetForm();
+        }
+    }
+
+    private boolean validasiInputCs() {
+        boolean isValid = false;
+        if(fieldNameCs.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Customer Name is required!");
+        }else if(fieldPhoneNumber.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Phone Number is required!");
+        }else if(fieldAddress.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Address is required!");
+        }else{
+            isValid = true;
+        }
+        return isValid;
+    }
+    private void loadCategoriesIntoComboBox() {
+    // Ambil nama layanan yang dipilih
+    String selectedServiceName = (String) selectService.getSelectedItem();
+
+    if (selectedServiceName != null) {
+        System.out.println("Selected Service Name: " + selectedServiceName);
+
+        // Cari kategori berdasarkan nama layanan
+        List<ModelCategory> categories = servisCategory.findCategoryByServiceName(selectedServiceName);
+
+        // Muat kategori ke JComboBox selectCategory
+        DefaultComboBoxModel<String> categoryModel = new DefaultComboBoxModel<>();
+        for (ModelCategory category : categories) {
+            categoryModel.addElement(category.getName()); // Tambahkan nama kategori ke model
+            
+        }
+        selectCategory.setModel(categoryModel);
+        
+        // Tambahkan listener untuk memperbarui harga berdasarkan kategori yang dipilih
+        selectCategory.addActionListener(evt -> {
+    String selectedCategoryName = (String) selectCategory.getSelectedItem();
+    if (selectedCategoryName != null) {
+        for (ModelCategory category : categories) {
+            if (selectedCategoryName.equals(category.getName())) {
+                try {
+                    // Ambil berat dari fieldWeight
+                    int weight = Integer.parseInt(fieldWeight.getText());
+                    
+                    // Hitung total harga
+                    int price = category.getPrice() * weight;
+                    
+                    // Perbarui label total
+                    lblTotal.setText("Rp " + price);
+                } catch (NumberFormatException e) {
+                    // Tampilkan pesan jika berat bukan angka
+                    JOptionPane.showMessageDialog(null, "Please enter a valid weight!", "Input Error", JOptionPane.ERROR_MESSAGE);
+                }
+                break;
+            }
+        }
+    }
+});
+    }
+}
+
+
+        private void loadServicesIntoJComboBox() {
+    try {
+        // Ambil data layanan
+        List<ModelService> services = servisCategory.showService();
+
+        // Buat model JComboBox
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+        // Tambahkan nama layanan ke JComboBox
+        for (ModelService service : services) {
+            model.addElement(service.getName());
+        }
+
+        // Set model ke JComboBox
+        selectService.setModel(model);
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+        
+
 }

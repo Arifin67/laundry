@@ -56,11 +56,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -69,14 +71,14 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/laundrykasir/img/Washing Machine.png"/>
+              <Image iconType="3" name="/img/Washing Machine.png"/>
             </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/laundrykasir/img/Cancel_1.png"/>
+              <Image iconType="3" name="/img/Cancel_1.png"/>
             </Property>
           </Properties>
           <Events>
@@ -204,7 +206,7 @@
             <Component class="javax.swing.JLabel" name="icon">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/laundrykasir/img/Home.png"/>
+                  <Image iconType="3" name="/img/Home.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -295,7 +297,7 @@
             <Component class="javax.swing.JLabel" name="icon1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/laundrykasir/img/Service.png"/>
+                  <Image iconType="3" name="/img/Service.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -383,7 +385,7 @@
             <Component class="javax.swing.JLabel" name="icon2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/laundrykasir/img/Exchange Dollar.png"/>
+                  <Image iconType="3" name="/img/Exchange Dollar.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -471,7 +473,7 @@
             <Component class="javax.swing.JLabel" name="icon3">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/laundrykasir/img/Add Administrator.png"/>
+                  <Image iconType="3" name="/img/Add Administrator.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -559,7 +561,7 @@
             <Component class="javax.swing.JLabel" name="icon4">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/laundrykasir/img/Logout.png"/>
+                  <Image iconType="3" name="/img/Logout.png"/>
                 </Property>
               </Properties>
             </Component>
@@ -659,7 +661,7 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/laundrykasir/img/Woman doing laundry in washing machine.png"/>
+                  <Image iconType="3" name="/img/Woman doing laundry in washing machine.png"/>
                 </Property>
               </Properties>
               <Constraints>
